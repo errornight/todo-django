@@ -1,0 +1,51 @@
+    <!-- GetName Form -->
+<div class="flex items-center justify-center h-screen">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="username">
+          Enter your name:
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="John Doe">
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>   
+
+
+    <!-- Tasks container -->
+<div class="container mx-auto px-4 py-4">
+        <h2 class="text-lg font-bold mb-4">All tasks for <span id="username">[username]</span></h2>
+
+        <!-- Add task button -->
+        <div class="flex justify-end mb-4">
+            <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11 9V1H9v8H1v2h8v8h2v-8h8V9h-8z" clip-rule="evenodd" />
+                </svg>
+                Add task
+            </button>
+        </div>
+
+        <!-- Tasks list -->
+        <ul class="space-y-4">
+            <!-- Task item -->
+            <li class="bg-gray-100 rounded-lg px-4 py-2 flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-lg">Task title</h3>
+                    <p class="text-sm text-red-500">Urgent</p>
+                </div>
+                <div>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500" checked>
+                        <span class="ml-2">Done</span>
+                    </label>
+                    <button class="text-gray-500 hover:text-gray-700 ml-4">Edit</button>
+                    <button class="text-red-500 hover:text-red-700 ml-4">Remove</button>
+                </div>
+            </li>
+        </ul>
+</div>
