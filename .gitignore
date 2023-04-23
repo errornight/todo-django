@@ -57,9 +57,14 @@ cover/
 
 # Django stuff:
 *.log
-local_settings.py
+PRIVATE_*
 db.sqlite3
 db.sqlite3-journal
+media/*
+main/migrations/0*
+
+# privte stuff:
+todo.night
 
 # Flask stuff:
 instance/
