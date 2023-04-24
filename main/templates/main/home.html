@@ -1,24 +1,10 @@
-    <!-- GetName Form -->
-<div class="flex items-center justify-center h-screen">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="username">
-          Enter your name:
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="John Doe">
-      </div>
-      <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-          Submit
-        </button>
-      </div>
-    </form>
-  </div>   
-
+{% extends 'base.html' %}
+{% block title %} Welcome {% endblock %}
+{% block content %}
 
     <!-- Tasks container -->
 <div class="container mx-auto px-4 py-4">
-        <h2 class="text-lg font-bold mb-4">All tasks for <span id="username">[username]</span></h2>
+        <h2 class="text-lg font-bold mb-4">All tasks for you!</h2>
 
         <!-- Add task button -->
         <div class="flex justify-end mb-4">
@@ -36,7 +22,6 @@
             <li class="bg-gray-100 rounded-lg px-4 py-2 flex items-center justify-between">
                 <div>
                     <h3 class="font-bold text-lg">Task title</h3>
-                    <p class="text-sm text-red-500">Urgent</p>
                 </div>
                 <div>
                     <label class="inline-flex items-center">
@@ -49,3 +34,4 @@
             </li>
         </ul>
 </div>
+{% endblock %}

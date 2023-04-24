@@ -4,8 +4,8 @@ from datetime import datetime
 import pytz
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['name', 'timesince']
-    search_fields = ['name']
+    list_display = ['public_id', 'timesince']
+    search_fields = ['public_id__icontain']
 
     @staticmethod
     def timesince(obj):
@@ -25,7 +25,7 @@ class UserAdmin(admin.ModelAdmin):
 
 class TasKAdmin(admin.ModelAdmin):
     list_display = ['title', 'user', 'status']
-    search_fields = ['title', 'description', 'user__username']
+    search_fields = ['title', 'description']
     list_filter = ['status']
 
 admin.site.register(models.User,UserAdmin)
