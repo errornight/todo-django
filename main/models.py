@@ -11,7 +11,7 @@ class User(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        # generate the cookie id
+        # we rewrite save method to generate public_id.
         if not self.public_id:
             data = f'{self.id}:{self.date_joined}'
             self.public_id = hashlib.sha256(data.encode()).hexdigest()

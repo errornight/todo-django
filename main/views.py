@@ -6,7 +6,8 @@ from .forms import AddTaskForm, EditTaskForm
 
 def cookie_check(view_func):
     # a decorator to check request cookie.
-
+    # if there is user_id value, query and pass it to the function.
+    # else generate an id, set it in clients search engin.
     def wrapper(request, *args, **kwargs):
         user_id = request.COOKIES.get('user_id')
         if user_id:
