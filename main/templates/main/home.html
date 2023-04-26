@@ -3,35 +3,74 @@
 {% block content %}
 
     <!-- Tasks container -->
-<div class="container mx-auto px-4 py-4">
+    <div class="container mx-auto px-4 py-4">
         <h2 class="text-lg font-bold mb-4">All tasks for you!</h2>
 
         <!-- Add task button -->
         <div class="flex justify-end mb-4">
-            <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M11 9V1H9v8H1v2h8v8h2v-8h8V9h-8z" clip-rule="evenodd" />
-                </svg>
-                Add task
-            </button>
+            <a href="{% url 'AddTask' %}"> 
+                <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2 -mt-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11 9V1H9v8H1v2h8v8h2v-8h8V9h-8z" clip-rule="evenodd" />
+                    </svg>
+                    Add task
+                </button>
+            </a>
         </div>
 
         <!-- Tasks list -->
         <ul class="space-y-4">
             <!-- Task item -->
+            {% for task in tasks %}
             <li class="bg-gray-100 rounded-lg px-4 py-2 flex items-center justify-between">
                 <div>
-                    <h3 class="font-bold text-lg">Task title</h3>
+                    <h3 class="font-bold text-lg">{{ task.title }}</h3>
                 </div>
                 <div>
                     <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500" checked>
+                        <input id="task-checkbox-{{ task.id }}" data-task-id="{{ task.id }}" type="checkbox" class="task-checkbox h-5 w-5 text-blue-500" >
                         <span class="ml-2">Done</span>
                     </label>
-                    <button class="text-gray-500 hover:text-gray-700 ml-4">Edit</button>
-                    <button class="text-red-500 hover:text-red-700 ml-4">Remove</button>
+                    
+                    <a href="{% url 'EditTask' task.id %}">
+                        <button class="text-gray-500 hover:text-gray-700 ml-4">Edit</button>
+                    </a>
+
+                    <form action="{% url 'RemoveTask' task.id %}" method="post" enctype="application/x-www-form-urlencoded">
+                        {% csrf_token %}    
+                        <button class="text-red-500 hover:text-red-700 ml-4" type="submit">Remove</button>
+                    </form>
+                    
                 </div>
             </li>
+            {% endfor %}
         </ul>
-</div>
+    </div>
+
+<script>
+        document.querySelectorAll('.task-checkbox').forEach(function(el) {
+            el.addEventListener('click', function() {
+                var taskId = this.dataset.taskId;
+                var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                var status = this.checked;
+        
+                fetch(`/update/${taskId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                    body: JSON.stringify({
+                        'status': status,
+                    }),
+                })
+                .then(response => {
+                    
+                    location.reload();
+                    
+                });
+            });
+        });
+</script>
+    
 {% endblock %}
